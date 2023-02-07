@@ -70,18 +70,15 @@ instplayit(){
     fi
 
     yellow "请复制接下来的链接至浏览器，以进行Playit账户登录。登录完成之后按下Ctrl+C退出程序"
-    read -p "按下回车键以继续"
+    sleep 5
 
-    playit
-
-    clear
     if [[ -f "./playit.toml" ]]; then
-        green "Playit 账户登录成功，正在安装系统守护"
+        green "Playit 账户登录成功，正在继续安装"
     else
-        red "Playit 账户登录失败，请卸载后重试！"
+        playit
         exit 1
     fi
-    
+
     mkdir /etc/playit >/dev/null 2>&1
     mv playit.toml /etc/playit/playit.toml
     cat << EOF >/etc/systemd/system/playit.service
@@ -177,4 +174,5 @@ menu() {
         * ) exit 1 ;;
     esac
 }
+
 menu
