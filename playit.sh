@@ -69,7 +69,7 @@ instplayit(){
         red "下载 Playit 文件失败，请检查本机网络是否链接上GitHub！"
     fi
 
-    yellow "请复制接下来的链接至浏览器，以进行Playit账户登录。登录完成之后按下Ctrl+C退出程序"
+    yellow "请复制接下来的链接至浏览器，以进行Playit账户登录。登录完成之后按下Ctrl+C退出程序，然后重新进入脚本安装以进行最后设置"
     sleep 5
 
     if [[ -f "./playit.toml" ]]; then
@@ -95,6 +95,10 @@ LimitNOFILE=infinity
 [Install]
 WantedBy=multi-user.target
 EOF
+    systemctl daemon-reload
+    systemctl start playit
+    systemctl enable playit >/dev/null 2>&1
+
     if [[ -n $(systemctl status playit 2>/dev/null | grep -w active) && -f '/etc/playit/playit.toml' ]]; then
         green "Playit 隧道程序启动成功"
         yellow "请继续在网页：https://playit.gg/account/overview 设置隧道详细参数"
