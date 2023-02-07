@@ -56,7 +56,7 @@ instplayit(){
     ${PACKAGE_INSTALL[int]} curl wget sudo
 
     arch=$(archAffix)
-    if [[ $arch == "amd64"]]; then
+    if [[ $arch == "amd64" ]]; then
         wget -O /usr/local/bin/playit https://github.com/playit-cloud/playit-agent/releases/download/v0.9.3/playit-0.9.3
     else
         wget -O /usr/local/bin/playit https://github.com/playit-cloud/playit-agent/releases/download/v0.9.3/playit-0.9.3-aarch64
